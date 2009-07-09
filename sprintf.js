@@ -1,3 +1,15 @@
+/**
+	Supported format strings:
+		%o : numeric value as octal, formatted 0...
+		%x : numeric value as hex, formatted 0x...
+		%b : numeric value as binary, formatted 0b...
+		%d : numeric value, "normal"
+		%s : string
+	
+	To add a literal procent sign, include: %%
+	
+	Padding isn't supported.	
+*/
 function sprintf () {
     // variable attributes
     if (!arguments || arguments.length < 1) {
@@ -35,3 +47,20 @@ function sprintf () {
     return output
 }//sprintf
 
+
+/**
+	allows the following trick for format strings:
+
+	"%d.) %s".fmt(1, "some string")
+
+	yields:
+
+	1.) some string
+*/
+String.prototype.fmt = function () {
+    arr = []
+    for (var i=0; i!=arguments.length; ++i) {
+        arr[length]=arguments[i]
+    }
+    return sprintf(this, arr)
+} 
